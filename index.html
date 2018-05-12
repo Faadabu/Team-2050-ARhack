@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team 2050 ARhack</title>
+        <meta charset="UTF-8" />
+        <script src="jquery.min.js"></script>
+        <script src="aframe.min.js"></script>
+        <script src="particle-system/dist/aframe-particle-system-component.min.js"></script>
+        
+    </head>
+    <body>
+        <a-scene>
+                <a-assets>
+                    <a-asset-item id="object" src="prism.obj"></a-asset-item>
+                    <a-asset-item id="material" src="prism.mtl"></a-asset-item>
+                </a-assets>
+                
+                <!-- <a-obj-model position="0 0 0" src="#object" mtl="#material"></a-obj-model>
+                <a-light type="point" color="rgba(0, 250, 0, 0.5)" position="0 5 0"></a-light> -->
+
+                <a-entity id="player" collider-check>
+                    <a-entity raycaster="showLine:true; far= 100" line="color:orange" position="-8 -1 0"></a-entity>
+                </a-entity>
+
+            <a-camera position="0 2 5"> <!--For Testing 20 7 5 -->
+                <a-cursor color="red" />
+            </a-camera>
+        </a-scene>
+        <script>
+            Aframe.registerComponent('collider-check', {
+                dependencies: ['raycaster'],
+                init: function() {
+                    this.el.addEventListener('raycaster-intersected', function(){
+                        console.log('Player hit something')
+                    })
+                }
+            })
+        </script>
+    </body>
+</html>
